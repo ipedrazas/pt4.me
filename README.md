@@ -1,2 +1,4 @@
-# pt4.me
-pt4me poc
+# Ping that for me
+
+Little app to check if access to Kubernetes services is possible from source namespaces.
+
