@@ -1,0 +1,56 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev
+  labels:
+    name: dev
+
+---
+kind: LimitRange
+apiVersion: v1
+metadata:
+  name: limits
+  namespace: dev
+spec:
+  limits:
+  - type: Pod
+    max:
+      cpu: 800m
+      memory: 4Gi
+    min:
+      cpu: 200m
+      memory: 6Mi
+  - type: Container
+    default:
+      cpu: 400m
+      memory: 400Mi
+    defaultRequest:
+      cpu: 200m
+      memory: 200Mi
+    max:
+      cpu: 400m
+      memory: 4Gi
+    min:
+      cpu: 100m
+      memory: 3Mi
+
+---
+kind: ResourceQuota
+apiVersion: v1
+metadata:
+  name: quota
+  namespace: dev
+  labels:
+    size: small
+spec:
+  hard:
+    cpu: "8"
+    memory: 8Gi
+    persistentvolumeclaims: "10"
+    pods: "32"
+    replicationcontrollers: "32"
+    resourcequotas: "1"
+    secrets: "100"
+    services: "8"
+
