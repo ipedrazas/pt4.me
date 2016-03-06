@@ -10,4 +10,17 @@ angular.module('application.services').
 	            });
         };
 
+    }]).
+    service('K8sService', ['$http', 'KUBE_API_SERVER', function($http, KUBE_API_SERVER){
+
+        this.getServices = function(onSuccess, onError) {
+            $http.get(KUBE_API_SERVER + 'GET /api/v1/services')
+                .success(function(data) {
+                    onSuccess(data)
+                }).error(function(data){
+                    onError(data)
+                });
+        };
+
     }]);
+
